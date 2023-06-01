@@ -1,0 +1,10 @@
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_LinearFifo.c:116:9:SpiritLinearFifoReadNumElementsRxFifo	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_LinearFifo.c:134:9:SpiritLinearFifoReadNumElementsTxFifo	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_LinearFifo.c:155:6:SpiritLinearFifoSetAlmostFullThresholdRx	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_LinearFifo.c:178:9:SpiritLinearFifoGetAlmostFullThresholdRx	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_LinearFifo.c:197:6:SpiritLinearFifoSetAlmostEmptyThresholdRx	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_LinearFifo.c:218:9:SpiritLinearFifoGetAlmostEmptyThresholdRx	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_LinearFifo.c:239:6:SpiritLinearFifoSetAlmostFullThresholdTx	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_LinearFifo.c:266:9:SpiritLinearFifoGetAlmostFullThresholdTx	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_LinearFifo.c:285:6:SpiritLinearFifoSetAlmostEmptyThresholdTx	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_LinearFifo.c:310:9:SpiritLinearFifoGetAlmostEmptyThresholdTx	16	static

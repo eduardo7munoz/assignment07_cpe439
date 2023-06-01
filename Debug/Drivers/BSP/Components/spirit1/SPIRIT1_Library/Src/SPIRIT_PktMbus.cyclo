@@ -1,0 +1,11 @@
+SPIRIT_PktMbus.c:118:6:SpiritPktMbusInit	1
+SPIRIT_PktMbus.c:146:6:SpiritPktMbusGetInfo	1
+SPIRIT_PktMbus.c:166:6:SpiritPktMbusSetFormat	1
+SPIRIT_PktMbus.c:208:6:SpiritPktMbusSetPreamble	1
+SPIRIT_PktMbus.c:222:9:SpiritPktMbusGetPreamble	1
+SPIRIT_PktMbus.c:241:6:SpiritPktMbusSetPostamble	1
+SPIRIT_PktMbus.c:254:9:SpiritPktMbusGetPostamble	1
+SPIRIT_PktMbus.c:273:6:SpiritPktMbusSetSubmode	1
+SPIRIT_PktMbus.c:286:13:SpiritPktMbusGetSubmode	1
+SPIRIT_PktMbus.c:305:6:SpiritPktMbusSetPayloadLength	1
+SPIRIT_PktMbus.c:325:10:SpiritPktMbusGetPayloadLength	1

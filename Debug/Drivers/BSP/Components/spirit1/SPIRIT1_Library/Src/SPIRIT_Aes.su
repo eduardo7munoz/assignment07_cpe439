@@ -1,0 +1,9 @@
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Aes.c:118:6:SpiritAesMode	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Aes.c:154:6:SpiritAesWriteDataIn	40	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Aes.c:184:6:SpiritAesReadDataOut	40	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Aes.c:215:6:SpiritAesWriteKey	40	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Aes.c:236:6:SpiritAesReadKey	40	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Aes.c:256:6:SpiritAesDeriveDecKeyFromEnc	8	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Aes.c:269:6:SpiritAesExecuteEncryption	8	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Aes.c:282:6:SpiritAesExecuteDecryption	8	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Aes.c:295:6:SpiritAesDeriveDecKeyExecuteDec	8	static

@@ -1,0 +1,11 @@
+SPIRIT_Calibration.c:120:6:SpiritCalibrationRco	2
+SPIRIT_Calibration.c:152:6:SpiritCalibrationVco	2
+SPIRIT_Calibration.c:182:6:SpiritCalibrationSetRcoCalWords	1
+SPIRIT_Calibration.c:209:6:SpiritCalibrationGetRcoCalWords	1
+SPIRIT_Calibration.c:229:9:SpiritCalibrationGetVcoCalData	1
+SPIRIT_Calibration.c:248:6:SpiritCalibrationSetVcoCalDataTx	1
+SPIRIT_Calibration.c:270:9:SpiritCalibrationGetVcoCalDataTx	1
+SPIRIT_Calibration.c:289:6:SpiritCalibrationSetVcoCalDataRx	1
+SPIRIT_Calibration.c:311:9:SpiritCalibrationGetVcoCalDataRx	1
+SPIRIT_Calibration.c:330:6:SpiritCalibrationSelectVco	2
+SPIRIT_Calibration.c:362:8:SpiritCalibrationGetVcoSelecttion	2

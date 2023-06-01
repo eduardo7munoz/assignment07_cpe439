@@ -1,0 +1,7 @@
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Irq.c:121:6:SpiritIrqDeInit	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Irq.c:154:6:SpiritIrqInit	32	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Irq.c:180:6:SpiritIrq	32	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Irq.c:236:6:SpiritIrqGetMask	32	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Irq.c:270:6:SpiritIrqGetStatus	32	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Irq.c:292:6:SpiritIrqClearStatus	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Irq.c:309:12:SpiritIrqCheckFlag	32	static

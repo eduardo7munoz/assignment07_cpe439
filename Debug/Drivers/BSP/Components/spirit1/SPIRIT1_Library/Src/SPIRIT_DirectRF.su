@@ -1,0 +1,4 @@
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_DirectRF.c:118:6:SpiritDirectRfSetRxMode	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_DirectRF.c:143:10:SpiritDirectRfGetRxMode	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_DirectRF.c:162:6:SpiritDirectRfSetTxMode	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_DirectRF.c:187:10:SpiritDirectRfGetTxMode	16	static

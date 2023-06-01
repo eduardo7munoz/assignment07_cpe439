@@ -1,0 +1,6 @@
+SPIRIT_Management.c:89:6:SpiritManagementSetFrequencyBase	15
+SPIRIT_Management.c:186:9:SpiritManagementWaVcoCalibration	15
+SPIRIT_Management.c:286:6:SpiritManagementWaCmdStrobeTx	4
+SPIRIT_Management.c:312:6:SpiritManagementWaCmdStrobeRx	2
+SPIRIT_Management.c:323:6:SpiritManagementWaTRxFcMem	1
+SPIRIT_Management.c:330:6:SpiritManagementWaExtraCurrent	1

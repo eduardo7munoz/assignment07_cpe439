@@ -1,0 +1,11 @@
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:120:6:SpiritCalibrationRco	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:152:6:SpiritCalibrationVco	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:182:6:SpiritCalibrationSetRcoCalWords	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:209:6:SpiritCalibrationGetRcoCalWords	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:229:9:SpiritCalibrationGetVcoCalData	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:248:6:SpiritCalibrationSetVcoCalDataTx	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:270:9:SpiritCalibrationGetVcoCalDataTx	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:289:6:SpiritCalibrationSetVcoCalDataRx	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:311:9:SpiritCalibrationGetVcoCalDataRx	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:330:6:SpiritCalibrationSelectVco	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Calibration.c:362:8:SpiritCalibrationGetVcoSelecttion	16	static

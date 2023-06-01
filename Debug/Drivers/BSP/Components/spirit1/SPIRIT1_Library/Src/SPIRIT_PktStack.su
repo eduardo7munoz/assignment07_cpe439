@@ -1,0 +1,15 @@
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:119:6:SpiritPktStackInit	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:219:6:SpiritPktStackGetInfo	32	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:270:6:SpiritPktStackAddressesInit	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:333:6:SpiritPktStackGetAddressesInfo	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:362:6:SpiritPktStackLlpInit	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:411:6:SpiritPktStackLlpGetInfo	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:431:6:SpiritPktStackSetFormat	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:471:6:SpiritPktStackSetAddressLength	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:497:6:SpiritPktStackSetPayloadLength	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:524:10:SpiritPktStackGetPayloadLength	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:547:6:SpiritPktStackSetVarLengthWidth	32	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:587:6:SpiritPktStackSetRxSourceMask	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:600:9:SpiritPktStackGetRxSourceMask	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:617:10:SpiritPktStackGetReceivedPktLength	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_PktStack.c:646:6:SpiritPktStackFilterOnSourceAddress	24	static

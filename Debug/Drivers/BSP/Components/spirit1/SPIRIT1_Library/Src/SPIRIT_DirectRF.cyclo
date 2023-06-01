@@ -1,0 +1,4 @@
+SPIRIT_DirectRF.c:118:6:SpiritDirectRfSetRxMode	1
+SPIRIT_DirectRF.c:143:10:SpiritDirectRfGetRxMode	1
+SPIRIT_DirectRF.c:162:6:SpiritDirectRfSetTxMode	1
+SPIRIT_DirectRF.c:187:10:SpiritDirectRfGetTxMode	1

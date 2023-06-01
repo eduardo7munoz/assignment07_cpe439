@@ -1,0 +1,6 @@
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Management.c:89:6:SpiritManagementSetFrequencyBase	64	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Management.c:186:9:SpiritManagementWaVcoCalibration	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Management.c:286:6:SpiritManagementWaCmdStrobeTx	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Management.c:312:6:SpiritManagementWaCmdStrobeRx	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Management.c:323:6:SpiritManagementWaTRxFcMem	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_Management.c:330:6:SpiritManagementWaExtraCurrent	16	static

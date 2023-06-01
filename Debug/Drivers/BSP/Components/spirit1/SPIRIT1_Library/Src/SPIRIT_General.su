@@ -1,0 +1,12 @@
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:118:6:SpiritGeneralBatteryLevel	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:150:6:SpiritGeneralSetBatteryLevel	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:189:14:SpiritGeneralGetBatteryLevel	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:208:6:SpiritGeneralBrownOut	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:240:6:SpiritGeneralHighPwr	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:272:6:SpiritGeneralSetExtRef	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:304:12:SpiritGeneralGetExtRef	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:323:6:SpiritGeneralSetXoGm	24	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:374:8:SpiritGeneralGetXoGm	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:392:12:SpiritGeneralGetPktType	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:411:10:SpiritGeneralGetDevicePartNumber	16	static
+../Drivers/BSP/Components/spirit1/SPIRIT1_Library/Src/SPIRIT_General.c:427:9:SpiritGeneralGetSpiritVersion	16	static

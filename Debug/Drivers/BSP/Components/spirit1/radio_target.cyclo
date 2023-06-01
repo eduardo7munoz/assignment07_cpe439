@@ -1,0 +1,9 @@
+radio_target.c:45:6:RadioSpiInit	2
+radio_target.c:61:13:RadioSpiWriteRegisters	1
+radio_target.c:90:13:RadioSpiReadRegisters	1
+radio_target.c:116:13:RadioSpiCommandStrobes	1
+radio_target.c:143:13:RadioSpiWriteFifo	1
+radio_target.c:171:13:RadioSpiReadFifo	1
+radio_target.c:198:6:RadioEnterShutdown	1
+radio_target.c:210:6:RadioExitShutdown	1
+radio_target.c:226:18:RadioCheckShutdown	1

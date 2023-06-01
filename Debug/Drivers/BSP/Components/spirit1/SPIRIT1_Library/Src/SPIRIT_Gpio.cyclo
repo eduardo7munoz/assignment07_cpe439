@@ -1,0 +1,12 @@
+SPIRIT_Gpio.c:119:6:SpiritGpioInit	1
+SPIRIT_Gpio.c:141:6:SpiritGpioTemperatureSensor	2
+SPIRIT_Gpio.c:181:6:SpiritGpioSetLevel	2
+SPIRIT_Gpio.c:220:13:SpiritGpioGetLevel	2
+SPIRIT_Gpio.c:253:6:SpiritGpioClockOutput	2
+SPIRIT_Gpio.c:287:6:SpiritGpioClockOutputInit	1
+SPIRIT_Gpio.c:312:6:SpiritGpioSetXOPrescaler	1
+SPIRIT_Gpio.c:338:24:SpiritGpioGetXOPrescaler	1
+SPIRIT_Gpio.c:357:6:SpiritGpioSetRCOPrescaler	1
+SPIRIT_Gpio.c:383:25:SpiritGpioGetRCOPrescaler	1
+SPIRIT_Gpio.c:402:6:SpiritGpioSetExtraClockCycles	1
+SPIRIT_Gpio.c:429:18:SpiritGpioGetExtraClockCycles	1

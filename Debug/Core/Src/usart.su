@@ -1,0 +1,8 @@
+../Core/Src/usart.c:36:6:MX_USART2_UART_Init	8	static,ignoring_inline_asm
+../Core/Src/usart.c:68:6:HAL_UART_MspInit	184	static
+../Core/Src/usart.c:112:6:HAL_UART_MspDeInit	16	static
+../Core/Src/usart.c:139:6:UART_print	32	static
+../Core/Src/usart.c:150:6:USART2_IRQHandler	16	static
+../Core/Src/usart.c:192:6:UART_escapes	16	static
+../Core/Src/usart.c:200:6:print_DM	8	static
+../Core/Src/usart.c:205:6:print_GM	8	static

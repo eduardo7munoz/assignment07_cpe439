@@ -1,0 +1,12 @@
+SPIRIT_General.c:118:6:SpiritGeneralBatteryLevel	2
+SPIRIT_General.c:150:6:SpiritGeneralSetBatteryLevel	5
+SPIRIT_General.c:189:14:SpiritGeneralGetBatteryLevel	1
+SPIRIT_General.c:208:6:SpiritGeneralBrownOut	2
+SPIRIT_General.c:240:6:SpiritGeneralHighPwr	2
+SPIRIT_General.c:272:6:SpiritGeneralSetExtRef	2
+SPIRIT_General.c:304:12:SpiritGeneralGetExtRef	1
+SPIRIT_General.c:323:6:SpiritGeneralSetXoGm	9
+SPIRIT_General.c:374:8:SpiritGeneralGetXoGm	1
+SPIRIT_General.c:392:12:SpiritGeneralGetPktType	1
+SPIRIT_General.c:411:10:SpiritGeneralGetDevicePartNumber	1
+SPIRIT_General.c:427:9:SpiritGeneralGetSpiritVersion	1

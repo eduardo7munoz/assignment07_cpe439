@@ -1,0 +1,9 @@
+../Drivers/BSP/Components/spirit1/radio_target.c:45:6:RadioSpiInit	8	static
+../Drivers/BSP/Components/spirit1/radio_target.c:61:13:RadioSpiWriteRegisters	40	static
+../Drivers/BSP/Components/spirit1/radio_target.c:90:13:RadioSpiReadRegisters	40	static
+../Drivers/BSP/Components/spirit1/radio_target.c:116:13:RadioSpiCommandStrobes	40	static
+../Drivers/BSP/Components/spirit1/radio_target.c:143:13:RadioSpiWriteFifo	40	static
+../Drivers/BSP/Components/spirit1/radio_target.c:171:13:RadioSpiReadFifo	40	static
+../Drivers/BSP/Components/spirit1/radio_target.c:198:6:RadioEnterShutdown	8	static
+../Drivers/BSP/Components/spirit1/radio_target.c:210:6:RadioExitShutdown	8	static
+../Drivers/BSP/Components/spirit1/radio_target.c:226:18:RadioCheckShutdown	8	static

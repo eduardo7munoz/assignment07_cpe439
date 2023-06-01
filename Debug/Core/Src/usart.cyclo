@@ -1,0 +1,8 @@
+usart.c:36:6:MX_USART2_UART_Init	2
+usart.c:68:6:HAL_UART_MspInit	3
+usart.c:112:6:HAL_UART_MspDeInit	2
+usart.c:139:6:UART_print	3
+usart.c:150:6:USART2_IRQHandler	8
+usart.c:192:6:UART_escapes	2
+usart.c:200:6:print_DM	1
+usart.c:205:6:print_GM	1

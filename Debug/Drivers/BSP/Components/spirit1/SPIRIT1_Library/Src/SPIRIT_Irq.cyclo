@@ -1,0 +1,7 @@
+SPIRIT_Irq.c:121:6:SpiritIrqDeInit	2
+SPIRIT_Irq.c:154:6:SpiritIrqInit	2
+SPIRIT_Irq.c:180:6:SpiritIrq	4
+SPIRIT_Irq.c:236:6:SpiritIrqGetMask	2
+SPIRIT_Irq.c:270:6:SpiritIrqGetStatus	2
+SPIRIT_Irq.c:292:6:SpiritIrqClearStatus	1
+SPIRIT_Irq.c:309:12:SpiritIrqCheckFlag	3
