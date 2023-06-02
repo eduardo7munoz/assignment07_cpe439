@@ -124,14 +124,14 @@ int main(void)
 	SpiritPktStackSetPayloadLength(PAYLOAD_SIZE);
 	//    SpiritPktBasicSetDestinationAddress(0x44);
 
-	retVal = xTaskCreate(TX_task, "TX task", 5*configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+5, &TXmessage_Handler);
+	retVal = xTaskCreate(TX_task, "TX task", 5*configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+4, &TXmessage_Handler);
 	if(retVal!=pdPASS){while(1);}//task creation failed
 
-	retVal = xTaskCreate(RX_task, "RX task", 2*configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+4, &RXmessage_Handler);
+	retVal = xTaskCreate(RX_task, "RX task", 2*configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, &RXmessage_Handler);
 	if(retVal!=pdPASS){while(1);}//task creation failed
 
 
-	retVal = xTaskCreate(print_task, "TX task", 2*configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, &printmessage_Handler);
+	retVal = xTaskCreate(print_task, "TX task", 2*configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+3, &printmessage_Handler);
 	if(retVal!=pdPASS){while(1);}//task creation failed
 
 	/* USER CODE END 2 */

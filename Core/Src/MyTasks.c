@@ -56,20 +56,42 @@ void TX_task(void *argument)
 			if(xSemaphoreTake( xTXsem, ( TickType_t ) 100 ) == pdTRUE )
 			{
 
+				do {
 
+					/* Go to the ready state */
+					if (g_xStatus.MC_STATE == MC_STATE_LOCK) {
+						SpiritCmdStrobeReady();
+					} else {
+						SpiritCmdStrobeSabort();
+					}
 
-				while(!xRxDoneFlag);
+					/* Delay for state transition */
+					for (volatile uint8_t i = 0; i != 0xFF; i++);
+
+					/* Update the global status register variable */
+					SpiritRefreshStatus();
+
+				} while (g_xStatus.MC_STATE != MC_STATE_READY);
+
+//				vTaskSuspend(RXmessage_Handler);
+//				if(xSemaphoreTake( xTXorRXmutex, ( TickType_t ) 100 ) == pdTRUE )
+//				{
 				sscanf(packetdata.address, "%x", &curraddress);
 			    SpiritPktCommonSetDestinationAddress(curraddress);
 
-				xTxDoneFlag = S_RESET;
+				xTxDoneFlag = READY;
 
 				// Send the payload
 				SPSGRF_StartTx(packetdata.message, strlen(packetdata.message));
 				while(!xTxDoneFlag);
 				UART_print("Message Sent\n\r");
 				memset(&packetdata.message[1], '\0', PAYLOAD_SIZE-1);
+				xRxDoneFlag = S_RESET;
+//				SPSGRF_StartRx();
 
+//				xSemaphoreGive(xTXorRXmutex);
+//				}
+//				vTaskResume(RXmessage_Handler);
 			}
 
 		}
@@ -91,11 +113,12 @@ void RX_task(void *argument)
 		for(;;)
 		{
 
-				xRxDoneFlag = S_RESET;
 
+
+				xRxDoneFlag = READY;
 					SPSGRF_StartRx();
 
-					while (!xRxDoneFlag);
+					while (xRxDoneFlag == READY);
 
 					if(xRxDoneFlag == RX_DATA_READY)
 					{
@@ -113,13 +136,8 @@ void RX_task(void *argument)
 					}
 					memset(payloadl, '\0', PAYLOAD_SIZE);
 					}
-//					xSemaphoreGive(xTXorRXmutex);
 
-					//
-////				}
-//
 		}
-//	}
 
 }
 
