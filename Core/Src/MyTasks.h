@@ -16,6 +16,7 @@
 
 
 
+#define PAYLOAD_SIZE 100
 void TX_task(void *argument);
 
 void RX_task(void *argument);

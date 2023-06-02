@@ -40,7 +40,7 @@
 #define POWER_INDEX                 7
 #define POWER_DBM                   11.6
 
-//#define RECEIVE_TIMEOUT             2000.0 // change the value for required timeout period
+#define RECEIVE_TIMEOUT            	100.0 // change the value for required timeout period
 #define RSSI_THRESHOLD              -120  // Default RSSI at reception, more than noise floor
 //#define CSMA_RSSI_THRESHOLD         -90   // Higher RSSI to Transmit. If it's lower, the Channel will be seen as busy.
 
@@ -59,7 +59,7 @@
 #define EN_FILT_MY_ADDRESS          S_ENABLE
 #define EN_FILT_MULTICAST_ADDRESS   S_ENABLE
 #define EN_FILT_BROADCAST_ADDRESS   S_ENABLE
-#define MY_ADDRESS                  0x11
+#define MY_ADDRESS                  0xED
 #define MULTICAST_ADDRESS           0xEE
 #define BROADCAST_ADDRESS           0xFF
 
@@ -73,6 +73,11 @@ void SPSGRF_StartTx(uint8_t *txBuff, uint8_t txLen);
 void SPSGRF_StartRx(void);
 uint8_t SPSGRF_GetRxData(uint8_t *rxBuff);
 
+typedef struct mystackpackets
+{
+	volatile char message[100];
+	char address[2];
+}Packets;
 
 
 /*** end of file ***/

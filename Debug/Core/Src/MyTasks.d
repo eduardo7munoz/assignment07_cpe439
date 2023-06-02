@@ -40,7 +40,7 @@ Core/Src/MyTasks.o: ../Core/Src/MyTasks.c ../Core/Src/MyTasks.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
- ../Core/Src/spsgrf.h \
+ ../Core/Inc/spsgrf.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Config.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Regs.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Aes.h \
@@ -62,7 +62,13 @@ Core/Src/MyTasks.o: ../Core/Src/MyTasks.c ../Core/Src/MyTasks.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Radio.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Config.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/MCU_Interface.h \
- /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Management.h
+ /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Management.h \
+ ../Core/Inc/spsgrf.h \
+ ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h \
+ ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
+ ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
+ ../Middlewares/Third_Party/FreeRTOS/Source/include/message_buffer.h \
+ ../Middlewares/Third_Party/FreeRTOS/Source/include/stream_buffer.h
 ../Core/Src/MyTasks.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
@@ -106,7 +112,7 @@ Core/Src/MyTasks.o: ../Core/Src/MyTasks.c ../Core/Src/MyTasks.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
-../Core/Src/spsgrf.h:
+../Core/Inc/spsgrf.h:
 /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Config.h:
 /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Regs.h:
 /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Aes.h:
@@ -129,3 +135,9 @@ Core/Src/MyTasks.o: ../Core/Src/MyTasks.c ../Core/Src/MyTasks.h \
 /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Config.h:
 /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/MCU_Interface.h:
 /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Management.h:
+../Core/Inc/spsgrf.h:
+../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:
+../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
+../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
+../Middlewares/Third_Party/FreeRTOS/Source/include/message_buffer.h:
+../Middlewares/Third_Party/FreeRTOS/Source/include/stream_buffer.h:

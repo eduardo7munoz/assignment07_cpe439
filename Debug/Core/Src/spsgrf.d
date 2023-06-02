@@ -1,4 +1,4 @@
-Core/Src/spsgrf.o: ../Core/Src/spsgrf.c ../Core/Src/spsgrf.h \
+Core/Src/spsgrf.o: ../Core/Src/spsgrf.c ../Core/Inc/spsgrf.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Config.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Regs.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Aes.h \
@@ -21,7 +21,7 @@ Core/Src/spsgrf.o: ../Core/Src/spsgrf.c ../Core/Src/spsgrf.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Config.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/MCU_Interface.h \
  /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Management.h
-../Core/Src/spsgrf.h:
+../Core/Inc/spsgrf.h:
 /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Config.h:
 /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Regs.h:
 /Users/eduardomunoz/Library/CloudStorage/OneDrive-CalPoly/college/Spring\ 2023/RTOS/assignment07_cpe439/Drivers/BSP/Components/spirit1/SPIRIT1_Library/Inc/SPIRIT_Aes.h:

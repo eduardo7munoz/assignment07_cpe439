@@ -19,17 +19,26 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
+#include"FreeRTOS.h"
+#include "semphr.h"
+#include "spsgrf.h"
+#include "MyTasks.h"
 
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
 #define PAYLOAD_SIZE 100
 UART_HandleTypeDef huart2;
-uint16_t count = 0;
-extern uint8_t RXorTX;
+uint16_t count = 1;
+extern uint8_t DMorGM;
 extern char payload[PAYLOAD_SIZE];
 extern uint8_t sendflag;
-
+extern xTXsem;
+extern TaskHandle_t TXmessage_Handler,RXmessage_Handler, printmessage_Handler;
+extern Packets packetdata;
+extern Packets gmpacket;
+uint8_t newaddressflag;
+uint8_t newaddresscount;
 
 /* USART2 init function */
 
@@ -149,6 +158,9 @@ void UART_print(char *outputstring)
 
 void USART2_IRQHandler()
 {
+	BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+
 	uint8_t RX = USART2->RDR;
 	char tempstr[6]={'\0'};
 	switch(RX)
@@ -159,32 +171,53 @@ void USART2_IRQHandler()
 			UART_escapes("[2J"); //clear everything
 			break;
 
-		case 'R':
-			RXorTX = 0x0;
-			UART_print("Receive Mode\n\r");
+
+		case 'D':
+			packetdata.message[0] = 2;
+			DMorGM =1;
+			UART_escapes("[s");
+		case '$':
+			newaddressflag = 1;
+			UART_print("Enter Address");
 			break;
-		case 'T':
-			RXorTX = 0x1;
-			UART_print("Transmit Mode\n\r");
+		case 'G':
+				packetdata.message[0] = 6;
+				packetdata.address[0] = 'F';//hardcoding broadcast address
+				packetdata.address[1] = 'F';
 			break;
-		case '\r':
-			UART_escapes("[1B");//move down 1 line
-			UART_escapes("\r"); //carriage return
-			sendflag = 1;
-			count = 0;
 		default:
 
-//			if(RX-0x30>=0 && RX-0x30<=9)
-//			{
-//
-//			}
 
-			payload[count] = RX;
-			++count;
-			while(!(USART2->ISR & USART_ISR_TXE));
-						USART2->TDR=RX;
+			if(newaddressflag)
+			{
+
+				packetdata.address[newaddresscount] = RX;
+				++newaddresscount;
+				USART2->TDR=RX;
+				if(newaddresscount == 2)
+				{
+
+					DMorGM=2;
+					newaddressflag = 0;
+					newaddresscount = 0;
+				}
+
+			}
+			else
+			{
+				packetdata.message[count] = RX;
+				++count;
+				while(!(USART2->ISR & USART_ISR_TXE));
+				USART2->TDR=RX;
+
+				if(RX == '\r') {
+					count = 1;
+					xSemaphoreGiveFromISR( xTXsem, &xHigherPriorityTaskWoken );
 
 
+
+				}
+			}
 				break;
 	}
 }

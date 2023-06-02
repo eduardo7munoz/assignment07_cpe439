@@ -30,9 +30,12 @@
 #include <string.h>
 #include <stdio.h>
 #include "spsgrf.h"
+
 TaskHandle_t TXmessage_Handler,RXmessage_Handler, printmessage_Handler;
-uint8_t RXorTX = 3;
+volatile uint8_t DMorGM = 0;
 uint8_t sendflag = 0;
+volatile SpiritFlagStatus xTxDoneFlag;
+volatile IrqList xRxDoneFlag;
 
 
 /* USER CODE END Includes */
@@ -49,9 +52,9 @@ uint8_t sendflag = 0;
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-#define PAYLOAD_SIZE 100
-volatile SpiritFlagStatus xTxDoneFlag;
-volatile SpiritFlagStatus xRxDoneFlag;
+
+//volatile SpiritFlagStatus xTxDoneFlag;
+//volatile SpiritFlagStatus xRxDoneFlag;
 char rxbuffer[PAYLOAD_SIZE];
 char payload[PAYLOAD_SIZE] = "I am Ed!\r\n";
 
@@ -86,7 +89,7 @@ int main(void)
 {
 	/* USER CODE BEGIN 1 */
 
-	char payloadRX[PAYLOAD_SIZE] = "I am Ed!\r\n";
+	char payloadRX[PAYLOAD_SIZE] = "";
 
 
 	uint8_t rxLen;
@@ -121,12 +124,15 @@ int main(void)
 	SpiritPktStackSetPayloadLength(PAYLOAD_SIZE);
 	//    SpiritPktBasicSetDestinationAddress(0x44);
 
-	retVal = xTaskCreate(TX_task, "TX task", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+4, &TXmessage_Handler);
+	retVal = xTaskCreate(TX_task, "TX task", 5*configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+5, &TXmessage_Handler);
 	if(retVal!=pdPASS){while(1);}//task creation failed
 
-	retVal = xTaskCreate(RX_task, "RX task", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+4, &RXmessage_Handler);
+	retVal = xTaskCreate(RX_task, "RX task", 2*configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+4, &RXmessage_Handler);
 	if(retVal!=pdPASS){while(1);}//task creation failed
 
+
+	retVal = xTaskCreate(print_task, "TX task", 2*configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY+1, &printmessage_Handler);
+	if(retVal!=pdPASS){while(1);}//task creation failed
 
 	/* USER CODE END 2 */
 
@@ -146,42 +152,42 @@ int main(void)
 	{
 		/* USER CODE END WHILE */
 
-		/* USER CODE BEGIN 3 */
-		while(RXorTX==3);
-		if(RXorTX)
-			{
-			    if(sendflag)
-			    {
-
-					xTxDoneFlag = S_RESET;
-
-					// Send the payload
-					SPSGRF_StartTx(payload, strlen(payload));
-					while(!xTxDoneFlag);
-
-					HAL_UART_Transmit(&huart2, "Payload Sent\r\n", 14, HAL_MAX_DELAY);
-
-					HAL_Delay(2000); // Block for 2000 ms
+//		/* USER CODE BEGIN 3 */
+//		while(RXorTX==3);
+//		if(RXorTX)
+//			{
+//			    if(sendflag)
+//			    {
 //
-			    	sendflag = 0;
-			    	memset(payload,'\0',100);
-			    }
-			}
-			else
-			{
-			xRxDoneFlag = S_RESET;
-			SPSGRF_StartRx();
-			while (!xRxDoneFlag);
-			uint8_t sAddress = SpiritPktCommonGetReceivedSourceAddress();
-			rxLen = SPSGRF_GetRxData(payloadRX);
-			char sAddString[4];
-			itoa(sAddress, sAddString, 16);
-			UART_print("x");
-			UART_print(sAddString);
-			UART_print(" :");
-			UART_print(payloadRX);
-			UART_print("\n\r");
-			}
+//					xTxDoneFlag = S_RESET;
+//
+//					// Send the payload
+//					SPSGRF_StartTx(payload, strlen(payload));
+//					while(!xTxDoneFlag);
+//
+//					HAL_UART_Transmit(&huart2, "Payload Sent\r\n", 14, HAL_MAX_DELAY);
+//
+//					HAL_Delay(2000); // Block for 2000 ms
+////
+//			    	sendflag = 0;
+//			    	memset(payload,'\0',100);
+//			    }
+//			}
+//			else
+//			{
+//			xRxDoneFlag = S_RESET;
+//			SPSGRF_StartRx();
+//			while (!xRxDoneFlag);
+//			uint8_t sAddress = SpiritPktCommonGetReceivedSourceAddress();
+//			rxLen = SPSGRF_GetRxData(payloadRX);
+//			char sAddString[4];
+//			itoa(sAddress, sAddString, 16);
+//			UART_print("x");
+//			UART_print(sAddString);
+//			UART_print(" :");
+//			UART_print(payloadRX);
+//			UART_print("\n\r");
+//			}
 
 	}
 	/* USER CODE END 3 */
@@ -236,7 +242,7 @@ void SystemClock_Config(void)
 	}
 }
 
-/* USER CODE BEGIN 4 */
+///* USER CODE BEGIN 4 */
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	SpiritIrqs xIrqStatus;
@@ -253,12 +259,19 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	}
 	if (xIrqStatus.IRQ_RX_DATA_READY)
 	{
-		xRxDoneFlag = S_SET;
+		xRxDoneFlag = RX_DATA_READY;
 	}
-	if (xIrqStatus.IRQ_RX_DATA_DISC || xIrqStatus.IRQ_RX_TIMEOUT)
+	if (xIrqStatus.IRQ_RX_DATA_DISC)
 	{
 		SpiritCmdStrobeRx();
+
 	}
+	if (xIrqStatus.IRQ_RX_TIMEOUT)
+		{
+		xRxDoneFlag = RX_TIMEOUT;
+
+		}
+
 }
 /* USER CODE END 4 */
 
