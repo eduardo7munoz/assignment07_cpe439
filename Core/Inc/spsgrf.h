@@ -60,7 +60,7 @@
 #define EN_FILT_MULTICAST_ADDRESS   S_ENABLE
 #define EN_FILT_BROADCAST_ADDRESS   S_ENABLE
 #define MY_ADDRESS                  0xDE
-#define MULTICAST_ADDRESS           0xED
+#define MULTICAST_ADDRESS           0xEE
 #define BROADCAST_ADDRESS           0xFF
 
 #define MAX_BUFFER_LEN              96
@@ -81,7 +81,7 @@ typedef struct mystackpackets
 
 typedef struct Node
 {
-	char address[2];
+	char address[4];
 	char Name[100];
 	struct People *next;
 

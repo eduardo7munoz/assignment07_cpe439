@@ -18,11 +18,18 @@ extern SpiritFlagStatus xTxDoneFlag;
 extern IrqList xRxDoneFlag;
 extern payload[PAYLOAD_SIZE];
 extern TaskHandle_t TXmessage_Handler,RXmessage_Handler, printmessage_Handler;
+extern People *head;
+
+//this link always point to last Link
+extern People *last;
+
+extern People *this;
+
 //might want to use a mutex in order to control what can print!!, i.e. not allow
 
 MessageBufferHandle_t xpayLoad;
 SemaphoreHandle_t xTXsem = NULL;
-SemaphoreHandle_t xTXorRXmutex = NULL;
+SemaphoreHandle_t xPrintNodes = NULL;
 SemaphoreHandle_t xTXorRX = NULL;
 
 People Node1;
@@ -38,10 +45,10 @@ void TX_task(void *argument)
 	UART_escapes("[2J");
 	uint8_t curraddress;
 	xTXsem = xSemaphoreCreateBinary();
-	xTXorRXmutex = xSemaphoreCreateMutex();
+	xPrintNodes = xSemaphoreCreateMutex();
 	xTXorRX = xSemaphoreCreateBinary();
 
-    if( xTXsem != NULL && xTXorRXmutex != NULL)
+    if( xTXsem != NULL && xPrintNodes != NULL)
     {
 		for(;;)
 		{
@@ -143,6 +150,7 @@ void RX_task(void *argument)
 
 void print_task(void *argument)
 {
+
 	size_t xBytesReceived;
 	char ucRxData[PAYLOAD_SIZE]={'\0'};
 	size_t xReceivedBytes;
@@ -150,6 +158,47 @@ void print_task(void *argument)
 
 	for(;;)
 	{
+		if(newaddressflag == 255)
+		{
+			if(xSemaphoreTake(xPrintNodes, ( TickType_t ) 100 ))
+			{
+				uint8_t listnum = 1;
+			    char str[5];
+
+
+				People *ptr = head;
+				while(ptr != NULL)
+				{
+				    itoa(listnum, str, 10);
+					UART_print(str);
+					UART_print(": ");
+					UART_print(ptr->Name);
+					UART_print(" at 0x");
+					UART_print(ptr->address);
+					UART_print("\n\r");
+					ptr = ptr->next;
+					++listnum;
+				}
+				listnum = 1;
+				UART_print("Enter Desired Contact(1,2,or 3...):");
+				while(newaddressflag==255);
+				uint8_t wantedaddr = atoi(packetdata.address);
+
+				ptr = head;
+
+				do
+				{
+					ptr = ptr->next;
+					++listnum;
+				}while(listnum < wantedaddr);
+
+				strcpy(packetdata.address, ptr->address);
+
+				xSemaphoreGive(xPrintNodes);
+				newaddressflag = 0;
+
+			}
+		}
 
 		memset(ucRxData, '\0', PAYLOAD_SIZE);
 		xReceivedBytes = xMessageBufferReceive( xpayLoad,
@@ -178,6 +227,7 @@ void print_task(void *argument)
 		    	itoa(sAddress, sAddString, 16);
 		    	UART_print("New Node: ");
 		    	UART_print(&ucRxData[1]);
+		    	ucRxData[strlen(&ucRxData[1])]='\0';
 		    	People *tempnode = CreateNode(sAddString,&ucRxData[1]);
 		    	insertLast(tempnode);
 

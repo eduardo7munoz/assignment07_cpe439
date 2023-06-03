@@ -3,6 +3,6 @@
 ../Core/Src/usart.c:121:6:HAL_UART_MspDeInit	16	static
 ../Core/Src/usart.c:148:6:UART_print	32	static
 ../Core/Src/usart.c:159:6:USART2_IRQHandler	24	static
-../Core/Src/usart.c:225:6:UART_escapes	16	static
-../Core/Src/usart.c:233:6:print_DM	8	static
-../Core/Src/usart.c:238:6:print_GM	8	static
+../Core/Src/usart.c:245:6:UART_escapes	16	static
+../Core/Src/usart.c:253:6:print_DM	8	static
+../Core/Src/usart.c:258:6:print_GM	8	static

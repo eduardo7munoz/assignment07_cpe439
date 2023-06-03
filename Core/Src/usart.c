@@ -167,10 +167,12 @@ void USART2_IRQHandler()
 	{
 
 			break;
+		case 'P':
+			newaddressflag = 255;
+			UART_escapes("[H");
 		case 'J':
 			UART_escapes("[2J"); //clear everything
 			break;
-
 
 		case 'D':
 			packetdata.message[0] = 2;
@@ -188,7 +190,8 @@ void USART2_IRQHandler()
 		default:
 
 
-			if(newaddressflag)
+
+			if(newaddressflag==1)
 			{
 
 				packetdata.address[newaddresscount] = RX;
@@ -200,6 +203,23 @@ void USART2_IRQHandler()
 					DMorGM=2;
 					newaddressflag = 0;
 					newaddresscount = 0;
+				}
+
+			}
+			else if(newaddressflag == 255)
+			{
+				while(!(USART2->ISR & USART_ISR_TXE));
+								USART2->TDR=RX;
+				if(RX !='\r')
+				{
+				packetdata.address[newaddresscount] = RX;
+
+				++newaddresscount;
+				}
+				else
+				{
+					newaddresscount = 0 ;
+					newaddressflag = 111;
 				}
 
 			}
