@@ -1,3 +1,3 @@
 ../Core/Src/MyTasks.c:32:6:TX_task	24	static
 ../Core/Src/MyTasks.c:102:6:RX_task	128	static
-../Core/Src/MyTasks.c:144:6:print_task	136	static
+../Core/Src/MyTasks.c:144:6:print_task	144	static

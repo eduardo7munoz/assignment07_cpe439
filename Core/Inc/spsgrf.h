@@ -79,6 +79,20 @@ typedef struct mystackpackets
 	char address[2];
 }Packets;
 
+typedef struct Node
+{
+	char address[2];
+	char Name[100];
+	struct People *next;
+
+}People;
+
+People *CreateNode(char *address, char *name);
+
+uint8_t sizeList(void);
+
+void insertLast(People *link);
+
 
 /*** end of file ***/
 

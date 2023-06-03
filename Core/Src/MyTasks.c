@@ -25,7 +25,7 @@ SemaphoreHandle_t xTXsem = NULL;
 SemaphoreHandle_t xTXorRXmutex = NULL;
 SemaphoreHandle_t xTXorRX = NULL;
 
-
+People Node1;
 Packets packetdata;
 Packets gmpacket;
 
@@ -157,10 +157,10 @@ void print_task(void *argument)
 		                                            sizeof( ucRxData ),
 		                                            xBlockTime );
 
-		    if( xReceivedBytes > 0 && (ucRxData[0]==2 || ucRxData[0]==6))
+		    if( xReceivedBytes > 0 && (ucRxData[0]==2))
 		    {
 		    	if(ucRxData[0]==2) UART_print("DM from ");
-		    	if(ucRxData[0]==6) UART_print("GM from ");
+
 		    	uint8_t sAddress = SpiritPktCommonGetReceivedSourceAddress();
 		    	char sAddString[2];
 		    	itoa(sAddress, sAddString, 16);
@@ -170,6 +170,17 @@ void print_task(void *argument)
 
 		    	UART_print(&ucRxData[1]);
 		    	UART_print("\n");
+		    }
+		    else if( xReceivedBytes > 0 &&ucRxData[0]==6)
+		    {
+		    	uint8_t sAddress = SpiritPktCommonGetReceivedSourceAddress();
+		    	char sAddString[2];
+		    	itoa(sAddress, sAddString, 16);
+		    	UART_print("New Node: ");
+		    	UART_print(&ucRxData[1]);
+		    	People *tempnode = CreateNode(sAddString,&ucRxData[1]);
+		    	insertLast(tempnode);
+
 		    }
 
 	}

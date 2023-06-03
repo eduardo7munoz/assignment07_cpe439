@@ -29,8 +29,52 @@
 
 //#define RECEIVE_TIMEOUT
 
+uint8_t listLength = 0;
+//this link always point to first Link
+People *head = NULL;
+
+//this link always point to last Link
+People *last = NULL;
+
+People *this = NULL;
+
+People *CreateNode(char *address, char *name)
+{
+    People *link = (People*) malloc(sizeof(People));
+    link->next =NULL;
+    strcpy(link->address, address);
+    strcpy(link->Name, name);
 
 
+    return link;
+
+}
+
+void insertLast(People *link)
+{
+
+    if(sizeList()==0)
+    {
+      //make it the last link
+      head = link;
+    }
+    else
+    {
+      //make link a new last link
+      last->next = link;
+
+    }
+
+   //point last to new last node
+   last = link;
+
+   listLength++;
+}
+
+uint8_t sizeList(void)
+{
+    return listLength;
+}
 
 
 void SPSGRF_Init(void)
