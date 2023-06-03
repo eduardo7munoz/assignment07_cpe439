@@ -76,6 +76,21 @@ uint8_t sizeList(void)
     return listLength;
 }
 
+People* FindInList (char *keyAddress)
+{
+    //start from first link
+    People *ptr = head;
+
+    if (ptr == NULL) return NULL;
+
+    while (strcmp(ptr->address,keyAddress) != EQUAL_STRINGS)//!=0
+    {
+        if(ptr->next == NULL) return NULL;
+        else ptr = ptr -> next;
+    }
+
+    return ptr;
+}
 
 void SPSGRF_Init(void)
 {

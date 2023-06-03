@@ -43,7 +43,7 @@ void TX_task(void *argument)
 
 	size_t xBytesSent;
 	UART_escapes("[2J");
-	uint8_t curraddress;
+	volatile uint8_t curraddress;
 	xTXsem = xSemaphoreCreateBinary();
 	xPrintNodes = xSemaphoreCreateMutex();
 	xTXorRX = xSemaphoreCreateBinary();
@@ -57,6 +57,7 @@ void TX_task(void *argument)
 				UART_print("DM to: 0x");
 				UART_print(packetdata.address);
 				DMorGM=0;
+
 
 			}
 
@@ -83,6 +84,7 @@ void TX_task(void *argument)
 //				vTaskSuspend(RXmessage_Handler);
 //				if(xSemaphoreTake( xTXorRXmutex, ( TickType_t ) 100 ) == pdTRUE )
 //				{
+
 				sscanf(packetdata.address, "%x", &curraddress);
 			    SpiritPktCommonSetDestinationAddress(curraddress);
 
@@ -109,14 +111,9 @@ void TX_task(void *argument)
 void RX_task(void *argument)
 {
 	xpayLoad = xMessageBufferCreate(PAYLOAD_SIZE);
-//	if(xpayLoad!=NULL)
-//	{
+
 		size_t xBytesSent;
 		volatile char payloadl[PAYLOAD_SIZE] = "";
-//		UART_escapes("[H");
-//		UART_escapes("[2J");
-//		UART_escapes("[1B");
-//		UART_escapes("[s");
 		for(;;)
 		{
 
@@ -187,11 +184,11 @@ void print_task(void *argument)
 
 				ptr = head;
 
-				do
+				while(listnum < wantedaddr)
 				{
 					ptr = ptr->next;
 					++listnum;
-				}while(listnum < wantedaddr);
+				}
 
 				strcpy(packetdata.address, ptr->address);
 				UART_print("New Message to ");
@@ -212,17 +209,33 @@ void print_task(void *argument)
 
 		    if( xReceivedBytes > 0 && (ucRxData[0]==2))
 		    {
-		    	if(ucRxData[0]==2) UART_print("DM from ");
 
-		    	uint8_t sAddress = SpiritPktCommonGetReceivedSourceAddress();
-		    	char sAddString[2];
-		    	itoa(sAddress, sAddString, 16);
-		    	UART_print("0x");
-		    	UART_print(sAddString);
-		    	UART_print(":");
+		    	if(xSemaphoreTake(xPrintNodes, ( TickType_t ) 100 ))
+		    	{
+		    		uint8_t sAddress = SpiritPktCommonGetReceivedSourceAddress();
+		    		char sAddString[2];
+		    		itoa(sAddress, sAddString, 16);
 
-		    	UART_print(&ucRxData[1]);
-		    	UART_print("\n");
+		    		People *ptr = FindInList(sAddString); //used to only print contacts
+		    		if(ptr != NULL) //if Null means message is not from a contact
+		    		{
+		    			if(ucRxData[0]==2 && SpiritPktCommonGetReceivedDestAddress() == MY_ADDRESS) {
+		    				UART_print("DM from ");
+		    			}
+		    			else if(ucRxData[0]==2) {
+		    				UART_print("GM from ");
+		    			}
+
+
+		    			UART_print("0x");
+		    			UART_print(sAddString);
+		    			UART_print(":");
+
+		    			UART_print(&ucRxData[1]);
+		    			UART_print("\n");
+		    		}
+		    		xSemaphoreGive(xPrintNodes);
+		    	}
 		    }
 		    else if( xReceivedBytes > 0 &&ucRxData[0]==6)
 		    {

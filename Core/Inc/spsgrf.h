@@ -59,13 +59,14 @@
 #define EN_FILT_MY_ADDRESS          S_ENABLE
 #define EN_FILT_MULTICAST_ADDRESS   S_ENABLE
 #define EN_FILT_BROADCAST_ADDRESS   S_ENABLE
-#define MY_ADDRESS                  0xDE
+#define MY_ADDRESS                  0xED
 #define MULTICAST_ADDRESS           0xEE
 #define BROADCAST_ADDRESS           0xFF
 
 #define MAX_BUFFER_LEN              96
 #define MAX_PAYLOAD_LEN             126 // (2^7 - 1) - 1 - 0 = 126 (LENGTH_WID=7, 1 address byte, & 0 control bytes)
 
+#define EQUAL_STRINGS               0
 
 /* Exported functions --------------------------------------------------------*/
 void SPSGRF_Init(void);
@@ -92,6 +93,8 @@ People *CreateNode(char *address, char *name);
 uint8_t sizeList(void);
 
 void insertLast(People *link);
+
+People* FindInList (char *keyAddress);
 
 
 /*** end of file ***/
