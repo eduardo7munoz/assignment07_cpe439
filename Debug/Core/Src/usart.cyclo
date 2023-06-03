@@ -3,6 +3,6 @@ usart.c:77:6:HAL_UART_MspInit	3
 usart.c:121:6:HAL_UART_MspDeInit	2
 usart.c:148:6:UART_print	3
 usart.c:159:6:USART2_IRQHandler	16
-usart.c:245:6:UART_escapes	2
-usart.c:253:6:print_DM	1
-usart.c:258:6:print_GM	1
+usart.c:246:6:UART_escapes	2
+usart.c:254:6:print_DM	1
+usart.c:259:6:print_GM	1

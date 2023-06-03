@@ -231,6 +231,7 @@ void USART2_IRQHandler()
 				USART2->TDR=RX;
 
 				if(RX == '\r') {
+					packetdata.message[count] = '\0';
 					count = 1;
 					xSemaphoreGiveFromISR( xTXsem, &xHigherPriorityTaskWoken );
 

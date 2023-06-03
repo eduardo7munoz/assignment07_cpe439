@@ -182,6 +182,7 @@ void print_task(void *argument)
 				listnum = 1;
 				UART_print("Enter Desired Contact(1,2,or 3...):");
 				while(newaddressflag==255);
+				UART_print("\n\r");
 				uint8_t wantedaddr = atoi(packetdata.address);
 
 				ptr = head;
@@ -193,6 +194,9 @@ void print_task(void *argument)
 				}while(listnum < wantedaddr);
 
 				strcpy(packetdata.address, ptr->address);
+				UART_print("New Message to ");
+				UART_print(ptr->Name);
+				UART_print(":\n\r");
 
 				xSemaphoreGive(xPrintNodes);
 				newaddressflag = 0;
@@ -227,6 +231,7 @@ void print_task(void *argument)
 		    	itoa(sAddress, sAddString, 16);
 		    	UART_print("New Node: ");
 		    	UART_print(&ucRxData[1]);
+		    	UART_print("\n\r");
 		    	ucRxData[strlen(&ucRxData[1])]='\0';
 		    	People *tempnode = CreateNode(sAddString,&ucRxData[1]);
 		    	insertLast(tempnode);
