@@ -1,3 +1,3 @@
-MyTasks.c:39:6:TX_task	9
-MyTasks.c:111:6:RX_task	3
-MyTasks.c:148:6:print_task	14
+MyTasks.c:41:6:TX_task	12
+MyTasks.c:119:6:RX_task	6
+MyTasks.c:186:6:print_task	11

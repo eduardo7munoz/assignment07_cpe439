@@ -34,6 +34,8 @@ extern uint8_t DMorGM;
 extern char payload[PAYLOAD_SIZE];
 extern uint8_t sendflag;
 extern xTXsem;
+extern People *head;
+extern SemaphoreHandle_t xPrintNodes;
 extern TaskHandle_t TXmessage_Handler,RXmessage_Handler, printmessage_Handler;
 extern Packets packetdata;
 extern Packets gmpacket;
@@ -167,25 +169,31 @@ void USART2_IRQHandler()
 	{
 
 			break;
-		case 'P':
+		case 'P'://Print Nodes to DM
+			packetdata.message[0] = 2;
 			newaddressflag = 255;
+			DMorGM = 2;
 			UART_escapes("[H");
 		case 'J':
 			UART_escapes("[2J"); //clear everything
 			break;
 
-		case 'D':
+		case 'D'://Direct Message
 			packetdata.message[0] = 2;
 			DMorGM =1;
 			UART_escapes("[s");
 		case '$':
 			newaddressflag = 1;
-			UART_print("Enter Address");
+			UART_print("Enter Address:");
 			break;
-		case 'G':
-				packetdata.message[0] = 6;
+		case 'N'://broadcast name
+
+		case 'G'://Group Message
+				packetdata.message[0] = (RX=='N')?6:2;
 				packetdata.address[0] = 'F';//hardcoding broadcast address
 				packetdata.address[1] = 'F';
+
+				DMorGM=3;
 			break;
 		default:
 
@@ -200,6 +208,7 @@ void USART2_IRQHandler()
 				if(newaddresscount == 2)
 				{
 
+					UART_print("\n\r");
 					DMorGM=2;
 					newaddressflag = 0;
 					newaddresscount = 0;
@@ -261,5 +270,83 @@ void print_GM()
 	UART_escapes("[32m");
 }
 
+void print_message_id()
+{
+	UART_print("\r");
+	UART_escapes("[2K");
+	if(strcmp(packetdata.address,"ff") == 0 || strcmp(packetdata.address,"FF") == 0)
+	{
+		if(packetdata.message[0]==2){
+		UART_print("GM to 0x");
+		UART_print(packetdata.address);
+		UART_print(":");}
+		else{
+			UART_print("Broadcast name to 0x");
+					UART_print(packetdata.address);
+					UART_print(":");
+		}
+	}
+	else
+	{
+		UART_print("DM to 0x");
+		UART_print(packetdata.address);
+		UART_print("  ");
+		People* ptr = FindInList(packetdata.address);
+		if(ptr != NULL)
+		{
+			UART_print(ptr->Name);
+			UART_print(": ");
+		}
+		else
+		{
+			UART_print(": ");
+		}
+	}
+
+}
+
+void print_linkedList()
+{
+	if(xSemaphoreTake(xPrintNodes, ( TickType_t ) 100 ))
+	{
+		uint8_t listnum = 1;
+		char str[5];
+
+
+		People *ptr = head;
+		UART_escapes("[H");
+		while(ptr != NULL)
+		{
+			itoa(listnum, str, 10);
+			UART_print(str);
+			UART_print(": ");
+			UART_print(ptr->Name);
+			UART_print(" at 0x");
+			UART_print(ptr->address);
+			UART_print("\n\r");
+			ptr = ptr->next;
+			++listnum;
+		}
+		listnum = 1;
+		UART_print("Enter Desired Contact(1,2,or 3...):");
+		while(newaddressflag==255);
+		UART_print("\n\r");
+		uint8_t wantedaddr = atoi(packetdata.address);
+
+		ptr = head;
+
+		while(listnum < wantedaddr)
+		{
+			ptr = ptr->next;
+			++listnum;
+		}
+
+		strcpy(packetdata.address, ptr->address);
+
+		xSemaphoreGive(xPrintNodes);
+		newaddressflag = 0;
+
+	}
+}
 
 /* USER CODE END 1 */

@@ -47,7 +47,8 @@ void USART2_IRQHandler();
 void UART_escapes(char *escstring);
 void print_DM();
 void print_GM();
-
+void print_message_id();
+void print_linkedList();
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

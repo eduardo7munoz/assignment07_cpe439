@@ -68,7 +68,8 @@ Core/Src/MyTasks.o: ../Core/Src/MyTasks.c ../Core/Src/MyTasks.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
  ../Middlewares/Third_Party/FreeRTOS/Source/include/message_buffer.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/stream_buffer.h
+ ../Middlewares/Third_Party/FreeRTOS/Source/include/stream_buffer.h \
+ ../Core/Inc/usart.h ../Core/Inc/main.h
 ../Core/Src/MyTasks.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
@@ -141,3 +142,5 @@ Core/Src/MyTasks.o: ../Core/Src/MyTasks.c ../Core/Src/MyTasks.h \
 ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/message_buffer.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/stream_buffer.h:
+../Core/Inc/usart.h:
+../Core/Inc/main.h:

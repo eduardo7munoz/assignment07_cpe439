@@ -10,6 +10,7 @@
 #include "semphr.h"
 #include "message_buffer.h"
 #include "spsgrf.h"
+#include "usart.h"
 
 extern uint8_t DMorGM;
 extern uint8_t newaddressflag;
@@ -36,6 +37,7 @@ People Node1;
 Packets packetdata;
 Packets gmpacket;
 
+
 void TX_task(void *argument)
 {
 	packetdata.message[0] = 2;
@@ -52,11 +54,14 @@ void TX_task(void *argument)
     {
 		for(;;)
 		{
-			if(DMorGM==2)
+			if(DMorGM==2 || DMorGM==3)
 			{
-				UART_print("DM to: 0x");
-				UART_print(packetdata.address);
-				DMorGM=0;
+				if(xSemaphoreTake(xPrintNodes, ( TickType_t ) 100 ))
+				{
+					print_message_id();
+					DMorGM=0;
+		    		xSemaphoreGive(xPrintNodes);
+				}
 
 
 			}
@@ -88,14 +93,17 @@ void TX_task(void *argument)
 				sscanf(packetdata.address, "%x", &curraddress);
 			    SpiritPktCommonSetDestinationAddress(curraddress);
 
+
 				xTxDoneFlag = READY;
 
 				// Send the payload
 				SPSGRF_StartTx(packetdata.message, strlen(packetdata.message));
 				while(!xTxDoneFlag);
-				UART_print("Message Sent\n\r");
+				UART_print("\n\r");
 				memset(&packetdata.message[1], '\0', PAYLOAD_SIZE-1);
 				xRxDoneFlag = S_RESET;
+				if(packetdata.message[0]==6)packetdata.message[0] =2;
+				print_message_id();
 //				SPSGRF_StartRx();
 
 //				xSemaphoreGive(xTXorRXmutex);
@@ -128,18 +136,48 @@ void RX_task(void *argument)
 					{
 					SPSGRF_GetRxData(payloadl);
 
-
-					xBytesSent = xMessageBufferSend( xpayLoad,
-							( void * ) payloadl,
-							strlen( payloadl), 100);
-
-					if( xBytesSent != strlen( payloadl) )
+					if(payloadl[0]==6)
 					{
-						/* The string could not be added to the message buffer because there was
+						if(xSemaphoreTake(xPrintNodes, ( TickType_t ) 100 ))
+						{
+
+
+							uint8_t sAddress = SpiritPktCommonGetReceivedSourceAddress();
+							char sAddString[2];
+							itoa(sAddress, sAddString, 16);
+							People *ptr = FindInList(sAddString);
+							if(ptr == NULL)
+							{
+								UART_print("\r");
+								UART_escapes("[2K"); //clear line
+								UART_print("New Node: ");
+								UART_print(&payloadl[1]);
+								UART_print("\n\r");
+								payloadl[strlen(&payloadl[1])]='\0';
+								People *tempnode = CreateNode(sAddString,&payloadl[1]);
+								insertLast(tempnode);
+							}
+							xSemaphoreGive(xPrintNodes);
+
+						}
+
+
+					}
+					else{
+
+						xBytesSent = xMessageBufferSend( xpayLoad,
+								( void * ) payloadl,
+								strlen( payloadl), 100);
+
+						if( xBytesSent != strlen( payloadl) )
+						{
+							/* The string could not be added to the message buffer because there was
 		        not enough free space in the buffer. */
+						}
+						memset(payloadl, '\0', PAYLOAD_SIZE);
 					}
-					memset(payloadl, '\0', PAYLOAD_SIZE);
 					}
+
 
 		}
 
@@ -148,7 +186,6 @@ void RX_task(void *argument)
 void print_task(void *argument)
 {
 
-	size_t xBytesReceived;
 	char ucRxData[PAYLOAD_SIZE]={'\0'};
 	size_t xReceivedBytes;
 	const TickType_t xBlockTime = pdMS_TO_TICKS( 20 );
@@ -157,50 +194,16 @@ void print_task(void *argument)
 	{
 		if(newaddressflag == 255)
 		{
-			if(xSemaphoreTake(xPrintNodes, ( TickType_t ) 100 ))
-			{
-				uint8_t listnum = 1;
-			    char str[5];
+			memset(&packetdata.message[1], '\0', PAYLOAD_SIZE-1);
+
+				print_linkedList();
 
 
-				People *ptr = head;
-				while(ptr != NULL)
-				{
-				    itoa(listnum, str, 10);
-					UART_print(str);
-					UART_print(": ");
-					UART_print(ptr->Name);
-					UART_print(" at 0x");
-					UART_print(ptr->address);
-					UART_print("\n\r");
-					ptr = ptr->next;
-					++listnum;
-				}
-				listnum = 1;
-				UART_print("Enter Desired Contact(1,2,or 3...):");
-				while(newaddressflag==255);
-				UART_print("\n\r");
-				uint8_t wantedaddr = atoi(packetdata.address);
 
-				ptr = head;
 
-				while(listnum < wantedaddr)
-				{
-					ptr = ptr->next;
-					++listnum;
-				}
-
-				strcpy(packetdata.address, ptr->address);
-				UART_print("New Message to ");
-				UART_print(ptr->Name);
-				UART_print(":\n\r");
-
-				xSemaphoreGive(xPrintNodes);
-				newaddressflag = 0;
-
-			}
 		}
-
+		else
+		{
 		memset(ucRxData, '\0', PAYLOAD_SIZE);
 		xReceivedBytes = xMessageBufferReceive( xpayLoad,
 		                                            ( void * ) ucRxData,
@@ -210,6 +213,12 @@ void print_task(void *argument)
 		    if( xReceivedBytes > 0 && (ucRxData[0]==2))
 		    {
 
+		    	uint8_t currmesslen = strlen(&packetdata.message[1]);
+		    	if(currmesslen>1)
+		    	{
+	    			UART_print("\r");
+		    		UART_escapes("[2K"); //clear line
+		    	}
 		    	if(xSemaphoreTake(xPrintNodes, ( TickType_t ) 100 ))
 		    	{
 		    		uint8_t sAddress = SpiritPktCommonGetReceivedSourceAddress();
@@ -219,7 +228,10 @@ void print_task(void *argument)
 		    		People *ptr = FindInList(sAddString); //used to only print contacts
 		    		if(ptr != NULL) //if Null means message is not from a contact
 		    		{
+		    			UART_print("\r");
+			    		UART_escapes("[2K"); //clear line
 		    			if(ucRxData[0]==2 && SpiritPktCommonGetReceivedDestAddress() == MY_ADDRESS) {
+
 		    				UART_print("DM from ");
 		    			}
 		    			else if(ucRxData[0]==2) {
@@ -229,27 +241,28 @@ void print_task(void *argument)
 
 		    			UART_print("0x");
 		    			UART_print(sAddString);
-		    			UART_print(":");
+		    			UART_print("  ");
+		    			UART_print(ptr->Name);
+		    			UART_print(": ");
 
 		    			UART_print(&ucRxData[1]);
 		    			UART_print("\n");
 		    		}
+		    		if(currmesslen>1)
+		    		{
+		    			print_message_id();
+		    			UART_print(&packetdata.message[1]);
+		    		}
+		    		else
+		    		{
+		    			print_message_id();
+		    		}
 		    		xSemaphoreGive(xPrintNodes);
 		    	}
 		    }
-		    else if( xReceivedBytes > 0 &&ucRxData[0]==6)
-		    {
-		    	uint8_t sAddress = SpiritPktCommonGetReceivedSourceAddress();
-		    	char sAddString[2];
-		    	itoa(sAddress, sAddString, 16);
-		    	UART_print("New Node: ");
-		    	UART_print(&ucRxData[1]);
-		    	UART_print("\n\r");
-		    	ucRxData[strlen(&ucRxData[1])]='\0';
-		    	People *tempnode = CreateNode(sAddString,&ucRxData[1]);
-		    	insertLast(tempnode);
-
-		    }
+		}
 
 	}
 }
+
+
